@@ -1,0 +1,14 @@
+{
+  "name": "webhook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "scripts": {
+    "start": "pm2 start ./webhook.js --name webhook --watch",
+    "stop": "pm2 stop webhook"
+
+  },
+  "devDependencies": {
+    "pm2": "^4.4.1"
+  }
+}
