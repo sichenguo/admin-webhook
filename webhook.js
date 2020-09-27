@@ -2,6 +2,7 @@ let http = require('http')
 let crypto = require('crypto')
 let spawn = require('child_process')
 // let sentMail = require('./sendMail')
+const SECRET = '123456'
 function sign(data) {
   return (
     'sha1=' +
@@ -21,7 +22,7 @@ let server = http.createServer((req, res) => {
     })
     req.on('end', () => {
       let body = Buffer.concat(buffers)
-      let sig = req.headers['x-hub-signature']
+      let sign = req.headers['x-hub-signature']
       let event = req.headers['x-github-event']
       let id = req.headers['x-github-delivery']
       if (sign !== sign(body)) {
