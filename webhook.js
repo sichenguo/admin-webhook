@@ -22,10 +22,10 @@ let server = http.createServer((req, res) => {
     })
     req.on('end', () => {
       let body = Buffer.concat(buffers)
-      let sign = req.headers['x-hub-signature']
+      let sig = req.headers['x-hub-signature']
       let event = req.headers['x-github-event']
       let id = req.headers['x-github-delivery']
-      if (sign !== sign(body)) {
+      if (sig !== sign(body)) {
         return res.end('Not Allowed')
       }
       res.setHeader('Content-Type', 'application/json')
