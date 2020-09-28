@@ -25,7 +25,9 @@ let server = http.createServer((req, res) => {
       let sig = req.headers['x-hub-signature']
       let event = req.headers['x-github-event']
       let id = req.headers['x-github-delivery']
+      console.log('sig', sig, 'event', event, 'body', body, 'id', id)
       if (sig !== sign(body)) {
+        console.log('sign(body)', sign(body))
         return res.end('Not Allowed')
       }
       res.setHeader('Content-Type', 'application/json')
@@ -33,6 +35,7 @@ let server = http.createServer((req, res) => {
       // =========================================
       if (event === 'push') {
         let payload = JSON.parse(body)
+        console.log('payload', payload)
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = []
         child.stdout.on('data', data => {
