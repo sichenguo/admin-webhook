@@ -1,11 +1,15 @@
 #!/bin/bash
-WORK_PATH='/usr/projects/react-front-server'
+WORK_PATH='/usr/projects/react-admin-front'
 cd $WORK_PATH
 echo "先清除老代码"
 git reset --hard origin/master
 git clean -f
 echo '拉取最新代码'
 git pull origin master
+echo '编译 暂时去掉因为机器打包太慢'
+# cd ./client
+# npm run build
+# cd ..
 
 echo '开始执行构建'
 docker build -t admin-front:1.0 .
